@@ -2,18 +2,28 @@
 <html lang="en">
 <!--<script type="text/javascript" src="C:\Users\Jason\Documents\JavaScript\js\jquery.js"></script>
 --><script src="http://code.jquery.com/jquery-1.10.2.js"></script> 
+<link rel="stylesheet" type="text/css" href="IWAStyleSheet.css">
 		
 	<meta charset="utf-8">
 		<body>
-			
-			<div id="inputFields">
-				
-				
+		<h1>IntraOffice Chat</h1>
+		<div class="outerDiv">
+			<div class="output">
+				<?php
+	include('db.php');
+
+		$sql = 'select * from `iwa`.`textbox`;';	
+		foreach ($DBH->query($sql) as $row) {                     
+		echo $row['username'] . "\t". $row['message'] . "<br>";                    
+    }
+?>
+						</div><br>	
 					Name: <input type="text" name="username" id="username" ></input>
-					Message: <input type="textarea" name="message" id="message"> </input><br>    
-					<button onclick="saveData();">Send</button>	
-				
-			</div>
+					Message: <input type="textarea" name="message" id="message"> </input><br><br>   
+					<button class="B" onclick="saveData();">Submit</button>	
+</div>					
+			
+			
 		
 			<script>
 
@@ -28,13 +38,6 @@ function saveData(){
 
 </script
 
-<?php
-	include('db.php');
 
-		$sql = 'select * from `iwa`.`textbox`;';    
-		foreach ($DBH->query($sql) as $row) {                     
-		echo $row['username'] . "\t". $row['message'] . "<br>";                    
-    }			
-?>
 		</body> 
 </html>
