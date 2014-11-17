@@ -1,25 +1,21 @@
 <!doctype html>
 <html lang="en">
-<!--<script type="text/javascript" src="C:\Users\Jason\Documents\JavaScript\js\jquery.js"></script>
---><script src="http://code.jquery.com/jquery-1.10.2.js"></script> 
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <link rel="stylesheet" type="text/css" href="IWAStyleSheet.css">
 		
 	<meta charset="utf-8">
 		<body>
 		<h1>IntraOffice Chat</h1>
+		<div id="loading">
+				<img src="loadingBar.gif"/>
+				<p id="demo" style="color:red">Please wait...</p>
+			</div>
 		<div class="outerDiv">
 			<div class="output">
-				<?php
-	include('db.php');
-
-		$sql = 'select * from `iwa`.`textbox`;';	
-		foreach ($DBH->query($sql) as $row) {                     
-		echo $row['username'] . "\t". $row['message'] . "<br>";                    
-    }
-?>
+				
 						</div><br>	
 					Name: <input type="text" name="username" id="username" ></input>
-					Message: <input type="textarea" name="message" id="message"> </input><br><br>   
+					Message: <input type="textarea" class="message" id="message"> </input><br><br>   
 					<button class="B" onclick="saveData();">Submit</button>	
 </div>					
 			
@@ -32,11 +28,39 @@ function saveData(){
 	var message = document.getElementById('message').value;
   $.post( "TextBoxDBConnection.php", { username: username, message: message })
   .done(function( data ) {
-   alert(data);
-   });
-   }
+   document.getElementById('username').value = "";
+   document.getElementById('message').value = "";
 
-</script
+   });
+   
+ // $('.output').load('.output);
+   }	
+			$('.outerDiv').hide();
+			setInterval(function(){myTimer()},2000);
+			
+				function myTimer() {
+				var d = new Date();
+				$('.outerDiv').show();
+				$('#loading').hide();
+				}
+				window.setInterval("refreshDiv()", 2000);  
+            function refreshDiv(){   
+                document.getElementById('.output').innerHTML = "Testing ";  
+				alert("yes");
+            }
+
+</script>
+   <script>
+$(document).ready(function() {
+auto_refresh();
+});
+function auto_refresh(){
+$('.output').load('retreive.php').fadeIn("fast");
+
+}
+var refreshId = setInterval(auto_refresh, 1000);
+
+   		</script>
 
 
 		</body> 

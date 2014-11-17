@@ -6,7 +6,7 @@
 				
 				$username = $_POST['username'];
 				$message = $_POST['message'];
-				echo '<b>'. $username . '</b>' . $message ;
+				
 				$msg = 1;
 
 				try{
